@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FirstFragment">
+
+    <TextView
+        android:id="@+id/textview_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/hello_first_fragment"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <TextView
+        android:id="@+id/textview_first2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/hello_first_fragment"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/textview_first"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.791" />
+
+    <Button
+        android:id="@+id/IncrementBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textview_first"
+        app:layout_constraintStart_toEndOf="@+id/textview_first"
+        app:layout_constraintTop_toBottomOf="@id/textview_first"
+        app:layout_constraintVertical_bias="0.128" />
+
+    <Button
+        android:id="@+id/DecrementBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textview_first"
+        app:layout_constraintStart_toStartOf="@+id/textview_first"
+        app:layout_constraintTop_toBottomOf="@id/textview_first"
+        app:layout_constraintVertical_bias="0.128" />
+
+    <Button
+        android:id="@+id/prevCounterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Prev"
+        app:layout_constraintStart_toStartOf="@+id/DecrementBtn"
+        app:layout_constraintTop_toBottomOf="@+id/deleteCounter" />
+
+    <Button
+        android:id="@+id/saveDayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Save"
+        app:layout_constraintStart_toStartOf="@+id/prevCounterButton"
+        app:layout_constraintTop_toBottomOf="@+id/prevCounterButton" />
+
+    <Button
+        android:id="@+id/nextCounterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Next"
+        app:layout_constraintEnd_toEndOf="@+id/IncrementBtn"
+        app:layout_constraintTop_toBottomOf="@+id/AddCounterButton" />
+
+    <Button
+        android:id="@+id/seeDayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="See"
+        app:layout_constraintEnd_toEndOf="@+id/IncrementBtn"
+        app:layout_constraintTop_toBottomOf="@+id/nextCounterButton" />
+
+    <Button
+        android:id="@+id/deleteCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Delete"
+        app:layout_constraintStart_toStartOf="@+id/DecrementBtn"
+        app:layout_constraintTop_toBottomOf="@+id/DecrementBtn" />
+
+    <Button
+        android:id="@+id/AddCounterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Add"
+        app:layout_constraintEnd_toEndOf="@+id/IncrementBtn"
+        app:layout_constraintTop_toBottomOf="@+id/IncrementBtn" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

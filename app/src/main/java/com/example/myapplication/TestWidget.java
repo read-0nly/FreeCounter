@@ -26,6 +26,7 @@ public class TestWidget extends AppWidgetProvider {
     static AppWidgetManager awm;
     static int[] awids;
 */
+    static Context con;
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
@@ -70,6 +71,29 @@ public class TestWidget extends AppWidgetProvider {
 
         }
     }
+    public static void updateWidgets() {
+        String Keys;
+        SharedPreferences sharedPref;
+        AppWidgetManager awm;
+        int[] awids;
+
+        sharedPref = con.getSharedPreferences("PARAMS", MODE_PRIVATE);
+        Keys= sharedPref.getString("Keys","Counter");
+        String[] keyArr = Keys.split(":");
+
+        RemoteViews views = new RemoteViews(con.getPackageName(), R.layout.test_widget);
+
+        awm = AppWidgetManager.getInstance(con);
+        awids = awm.getAppWidgetIds(new ComponentName(con, TestWidget.class));
+        for (int i : awids) {
+            int counterIndex = sharedPref.getInt(("WidgetCounter:"+String.valueOf(i)),0);
+            SharedPreferences privateSP = con.getSharedPreferences(keyArr[counterIndex%keyArr.length], MODE_PRIVATE);
+            views.setTextViewText(R.id.w_LabelTextView,keyArr[counterIndex%keyArr.length]);
+            int value = privateSP.getInt("Value",0);
+            views.setTextViewText(R.id.w_ValueTextView,String.valueOf(value));
+            awm.updateAppWidget(i, views);
+        }
+    }
     private void updateWidgets(Context context){
         String Keys;
         SharedPreferences sharedPref;
@@ -96,7 +120,8 @@ public class TestWidget extends AppWidgetProvider {
 
     @Override
     public void onEnabled(Context context) {
-        // Enter relevant functionality for when the first widget is createdcontext.packageName + "_preferences"
+        // Enter relevant functionality for when the first widget is created
+        con = context;
 
     }
 
@@ -104,6 +129,7 @@ public class TestWidget extends AppWidgetProvider {
                             int appWidgetId) {
         String Keys;
         SharedPreferences sharedPref;
+        con = context;
         sharedPref = context.getSharedPreferences("PARAMS", MODE_PRIVATE);
         Keys= sharedPref.getString("Keys","Counter");
         int counterIndex = sharedPref.getInt(("WidgetCounter:"+String.valueOf(appWidgetId)),0);

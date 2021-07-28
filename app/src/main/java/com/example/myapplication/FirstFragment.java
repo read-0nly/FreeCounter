@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -199,6 +200,17 @@ deleteCounter
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshView();
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        TestWidget.updateWidgets();
+        refreshView();
+    }
     public void refreshView() {
         KeyBox.setText("Current Key: "+getKeyByIndex());
         ValueBox.setText("Current Value: "+getValueByIndex());

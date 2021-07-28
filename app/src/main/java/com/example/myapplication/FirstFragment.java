@@ -60,7 +60,6 @@ public class FirstFragment extends Fragment {
         SharedPreferences sharedPref = getActivity().getSharedPreferences("PARAMS", MODE_PRIVATE);
         Keys= sharedPref.getString("Keys","Counter");
 
-
         binding.seeDayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,7 +86,7 @@ public class FirstFragment extends Fragment {
                 ArrayList<String> goodKeys = new ArrayList();
                 for(String i : keys){
                     if(i.startsWith(key)){
-                        goodKeys.add(i.substring(4,6)+"/"+i.substring(6,8));
+                        goodKeys.add(i);
                     };
                 }
                 Collections.sort(goodKeys);
@@ -98,6 +97,13 @@ public class FirstFragment extends Fragment {
                 Snackbar.make(view, dayLog, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
+                SharedPreferences sharedPref = getActivity().getSharedPreferences("PARAMS", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putInt("GraphIndex", counterIndex);
+                editor.apply();
+
+                NavHostFragment.findNavController(FirstFragment.this)
+                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
             }
         });
         binding.saveDayButton.setOnClickListener(new View.OnClickListener() {
@@ -243,7 +249,6 @@ deleteCounter
             }
             SharedPreferences sharedPref = getActivity().getSharedPreferences("PARAMS", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
-            editor.remove(newKey);
             editor.putString("Keys", Keys);
             editor.apply();
 

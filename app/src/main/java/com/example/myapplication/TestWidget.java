@@ -77,21 +77,23 @@ public class TestWidget extends AppWidgetProvider {
         AppWidgetManager awm;
         int[] awids;
 
-        sharedPref = con.getSharedPreferences("PARAMS", MODE_PRIVATE);
-        Keys= sharedPref.getString("Keys","Counter");
-        String[] keyArr = Keys.split(":");
+        if(con!=null) {
+            sharedPref = con.getSharedPreferences("PARAMS", MODE_PRIVATE);
+            Keys = sharedPref.getString("Keys", "Counter");
+            String[] keyArr = Keys.split(":");
 
-        RemoteViews views = new RemoteViews(con.getPackageName(), R.layout.test_widget);
+            RemoteViews views = new RemoteViews(con.getPackageName(), R.layout.test_widget);
 
-        awm = AppWidgetManager.getInstance(con);
-        awids = awm.getAppWidgetIds(new ComponentName(con, TestWidget.class));
-        for (int i : awids) {
-            int counterIndex = sharedPref.getInt(("WidgetCounter:"+String.valueOf(i)),0);
-            SharedPreferences privateSP = con.getSharedPreferences(keyArr[counterIndex%keyArr.length], MODE_PRIVATE);
-            views.setTextViewText(R.id.w_LabelTextView,keyArr[counterIndex%keyArr.length]);
-            int value = privateSP.getInt("Value",0);
-            views.setTextViewText(R.id.w_ValueTextView,String.valueOf(value));
-            awm.updateAppWidget(i, views);
+            awm = AppWidgetManager.getInstance(con);
+            awids = awm.getAppWidgetIds(new ComponentName(con, TestWidget.class));
+            for (int i : awids) {
+                int counterIndex = sharedPref.getInt(("WidgetCounter:" + String.valueOf(i)), 0);
+                SharedPreferences privateSP = con.getSharedPreferences(keyArr[counterIndex % keyArr.length], MODE_PRIVATE);
+                views.setTextViewText(R.id.w_LabelTextView, keyArr[counterIndex % keyArr.length]);
+                int value = privateSP.getInt("Value", 0);
+                views.setTextViewText(R.id.w_ValueTextView, String.valueOf(value));
+                awm.updateAppWidget(i, views);
+            }
         }
     }
     private void updateWidgets(Context context){

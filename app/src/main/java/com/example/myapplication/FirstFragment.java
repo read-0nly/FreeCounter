@@ -25,6 +25,7 @@ import org.xml.sax.Parser;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
@@ -70,8 +71,7 @@ public class FirstFragment extends Fragment {
                 // creating a calendar
                 Calendar c = Calendar.getInstance();
                 String key = String.valueOf(c.get(Calendar.YEAR))+
-                        String.valueOf(c.get(Calendar.MONTH))+
-                        String.valueOf(c.get(Calendar.DATE));
+                        String.format("%2d",c.get(Calendar.MONTH)+1).replace(' ', '0');
 
                 //Snackbar.make(view, String.valueOf(privateSP.getInt(key,0)), Snackbar.LENGTH_LONG)
                 //       .setAction("Action", null).show();
@@ -85,12 +85,14 @@ public class FirstFragment extends Fragment {
                 }
                 ArrayList<String> goodKeys = new ArrayList();
                 for(String i : keys){
-                    if(i.startsWith(String.valueOf(c.get(Calendar.YEAR))+String.valueOf(c.get(Calendar.MONTH)))){
-                        goodKeys.add(i);
+                    if(i.startsWith(key)){
+                        goodKeys.add(i.substring(4,6)+"/"+i.substring(6,8));
                     };
                 }
+                Collections.sort(goodKeys);
+                Collections.reverse(goodKeys);
                 for(String i : goodKeys){
-                    dayLog+="["+i+"]:"+privateSP.getInt(i,0)+"\n";
+                    dayLog+="["+i+"]:"+String.format("%3d",privateSP.getInt(i,0))+"  |  ";
                 }
                 Snackbar.make(view, dayLog, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
@@ -104,8 +106,8 @@ public class FirstFragment extends Fragment {
                 // creating a calendar
                 Calendar c = Calendar.getInstance();
                 String key = String.valueOf(c.get(Calendar.YEAR))+
-                        String.valueOf(c.get(Calendar.MONTH))+
-                        String.valueOf(c.get(Calendar.DATE));
+                        String.format("%2d",c.get(Calendar.MONTH)+1).replace(' ', '0')+
+                        String.valueOf(c.get(Calendar.DATE)+1);
 
                 SharedPreferences privateSP = getActivity().
                         getSharedPreferences(keyArr[counterIndex%keyArr.length], MODE_PRIVATE);
@@ -214,7 +216,6 @@ deleteCounter
             editor.apply();
         }
         refreshView();
-        TestWidget.Keys = Keys;
     }
     public void removeKey(String newKey){
         if(Keys.contains(newKey)) {

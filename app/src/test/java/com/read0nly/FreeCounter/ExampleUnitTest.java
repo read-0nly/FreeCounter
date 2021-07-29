@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.read0nly.FreeCounter;
 
 import org.junit.Test;
 

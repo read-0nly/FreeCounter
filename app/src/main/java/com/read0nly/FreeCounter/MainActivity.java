@@ -1,21 +1,16 @@
-package com.example.myapplication;
+package com.read0nly.FreeCounter;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.myapplication.databinding.ActivityMainBinding;
+import com.read0nly.FreeCounter.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        CounterSet.self = new CounterSet(this);
         sharedPref = getPreferences(MODE_PRIVATE);
         Keys = sharedPref.getString("Keys","Counter");
         binding = ActivityMainBinding.inflate(getLayoutInflater());

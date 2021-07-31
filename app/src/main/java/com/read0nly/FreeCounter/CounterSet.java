@@ -75,7 +75,7 @@ public class CounterSet {
     }
     public void removeCounter(String k){
         Keys = splitKeys();
-        if(!Keys.contains(k)){ Keys.remove(k); }
+        if(Keys.contains(k)){ Keys.remove(k); }
         joinKeys();
         updateCounters();
     }
